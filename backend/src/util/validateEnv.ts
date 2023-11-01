@@ -6,4 +6,7 @@ export default cleanEnv(process.env, {
     PORT: port(),
     TMDB_BASE_URL: str(),
     TMDB_TOKEN: str(),
+    GOOGLE_CLIENT_ID: str(),
+    GOOGLE_SECRET_ID: str(),
+    SESSION_SECRET: str(),
 })
