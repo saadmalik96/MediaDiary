@@ -10,8 +10,10 @@ const mediaSchema = new Schema({
     title: { type: String, required: true },
     type: { type: String, required: true },
     release: { type: String },
-    genres: [genreSchema]
+    genres: [genreSchema],
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true });
+
 
 type Media = InferSchemaType<typeof mediaSchema>
 export default model<Media>("Media", mediaSchema);
