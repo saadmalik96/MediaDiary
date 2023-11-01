@@ -6,9 +6,10 @@ import env from "../util/validateEnv";
 const TMDB_BASE_URL = env.TMDB_BASE_URL
 const TMDB_TOKEN = env.TMDB_TOKEN
 
-export const getMedia: RequestHandler = async (req, res, next) => {
+export const getMedia: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const media = await MediaModel.find({ type: 'tv' }).exec();
+        const userId = (req.user as any)._id; 
+        const media = await MediaModel.find({ type: 'tv', user: userId }).exec();
         res.status(200).json(media);    
     } catch (error) {
         next(error);

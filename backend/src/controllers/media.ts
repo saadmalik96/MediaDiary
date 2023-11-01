@@ -52,7 +52,8 @@ export const saveMedia: RequestHandler = async (req: Request, res: Response, nex
             title: title,
             type: type,
             release: release,
-            genres: genres
+            genres: genres,
+            user: (req.user as any)._id 
         });
 
         res.status(201).json(newMedia);
@@ -60,5 +61,7 @@ export const saveMedia: RequestHandler = async (req: Request, res: Response, nex
         next(error);
     }
 };
+
+
 
 

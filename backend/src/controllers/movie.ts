@@ -8,7 +8,8 @@ const TMDB_TOKEN = env.TMDB_TOKEN
 
 export const getMedia: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const media = await MediaModel.find({ type: 'movie' }).exec();
+        const userId = (req.user as any)._id;  
+        const media = await MediaModel.find({ type: 'movie', user: userId }).exec();
         res.status(200).json(media);    
     } catch (error) {
         next(error);
