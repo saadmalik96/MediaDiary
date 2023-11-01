@@ -29,6 +29,7 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
-        '@typescript-eslint/no-non-null-assertion': 1
+        '@typescript-eslint/no-non-null-assertion': 1,
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }
