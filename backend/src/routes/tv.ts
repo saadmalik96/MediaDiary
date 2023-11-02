@@ -7,4 +7,6 @@ router.get("/", TvController.getMedia);
 
 router.get('/details/:tmdbId', TvController.getMediaDetails);
 
+router.get('/ratings/:tmdbId/season/:season', TvController.getSeasonRatings);
+
 export default router;
