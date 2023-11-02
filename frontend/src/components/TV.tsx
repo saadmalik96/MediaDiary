@@ -44,7 +44,7 @@ const TV: React.FC = () => {
             const formattedData = response.data.map((episode: any) => ({
                 name: `Episode ${episode.episodeNumber}`,
                 imdbID: episode.imdbID,
-                Rating: parseFloat(episode.imdbRating) || 0 
+                Rating: parseFloat(episode.imdbRating) || null 
             }));
             setChartData(formattedData);
         } catch (error) {
