@@ -8,8 +8,10 @@ export interface Media {
     tmdbId: string;
     title: string;
     type: string;
+    imdbId: string;
     release: string;
     genres: Genre[];
+    numSeasons: number;
     createdAt: string;
     updatedAt: string;
 }
