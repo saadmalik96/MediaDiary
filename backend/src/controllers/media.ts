@@ -43,17 +43,33 @@ export const saveMedia: RequestHandler = async (req: Request, res: Response, nex
                 'accept': 'application/json'
             }
         });
+        
+        //2nd api call to get imdb Id
+        const idResponse = await axios.get(`https://api.themoviedb.org/3/${type}/${tmdbId}/external_ids`, {
+            params: {
+                language: 'en-US'
+            },
+            headers: {
+                'Authorization': TMDB_TOKEN,
+                'accept': 'application/json'
+            }
+        });
 
+        const idData = idResponse.data
+        const imdbId = idData.imdb_id
         const detailedInfo = response.data;
         const genres = detailedInfo.genres;
+        const num_seasons = detailedInfo.number_of_seasons
 
         const newMedia = await MediaModel.create({
             tmdbId: tmdbId,
             title: title,
             type: type,
+            imdbID: imdbId,
+            numSeasons: num_seasons,
             release: release,
             genres: genres,
-            user: (req.user as any)._id 
+            user: (req.user as any)._id
         });
 
         res.status(201).json(newMedia);
@@ -61,7 +77,3 @@ export const saveMedia: RequestHandler = async (req: Request, res: Response, nex
         next(error);
     }
 };
-
-
-
-
