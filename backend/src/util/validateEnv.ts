@@ -9,4 +9,7 @@ export default cleanEnv(process.env, {
     GOOGLE_CLIENT_ID: str(),
     GOOGLE_SECRET_ID: str(),
     SESSION_SECRET: str(),
+    URL: str(),
+    OMDB_API_KEY: str(),
+    OMDB_BASE_URL: str()
 })
