@@ -7,7 +7,7 @@ import User from './models/user';
 passport.use(new GoogleStrategy({
     clientID: env.GOOGLE_CLIENT_ID,
     clientSecret: env.GOOGLE_SECRET_ID,
-    callbackURL: "http://localhost:5001/auth/google/callback"
+    callbackURL: `${env.URL}/auth/google/callback`
   },
   async (accessToken: string, refreshToken: string, profile: any, done: any) => {
     try {

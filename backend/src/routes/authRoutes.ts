@@ -1,5 +1,6 @@
 import express from 'express';
 import passport from 'passport';
+import env from "../util/validateEnv";
 
 const router = express.Router();
 
@@ -8,7 +9,7 @@ router.get('/google', passport.authenticate('google', {
 }));
 
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-    res.redirect('http://localhost:3000');
+    res.redirect("http://localhost:3000");
 });
 
 router.get('/logout', (req, res) => {
