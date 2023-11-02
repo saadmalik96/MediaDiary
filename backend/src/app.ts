@@ -9,17 +9,21 @@ import cors from 'cors';
 import passport from 'passport';
 import session from 'express-session';
 import "./auth";
+import path from 'path';
+import env from "./util/validateEnv";
 
 function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.status(401).json({ error: 'Not authenticated' });
+    res.redirect("http://localhost:3000");
 }
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// app.use(express.static(path.join(__dirname, './build')));
 
 //Initialize session
 app.use(session({
