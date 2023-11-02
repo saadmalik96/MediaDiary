@@ -9,6 +9,8 @@ const mediaSchema = new Schema({
     tmdbId: { type: String, required: true },
     title: { type: String, required: true },
     type: { type: String, required: true },
+    imdbID: { type: String },
+    numSeasons: { type: String },
     release: { type: String },
     genres: [genreSchema],
     user: { type: Schema.Types.ObjectId, ref: 'User' }
