@@ -6,7 +6,7 @@ const LoginPage: React.FC = () => {
     const handleGoogleLogin = () => {
         window.location.href = 'http://localhost:5001/auth/google';
     };
-
+//
     return (
         <Container
             sx={{
