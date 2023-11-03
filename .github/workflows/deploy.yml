@@ -11,17 +11,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Build frontend
-      run: |
-        cd frontend
-        npm install
-        npm run build
-
-    - name: Move frontend build to backend
-      run: |
-        mv frontend/build ./build
-
     
     - name: Install backend dependencies
       run: |
