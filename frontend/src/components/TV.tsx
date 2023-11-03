@@ -9,7 +9,7 @@ const TV: React.FC = () => {
     const [tvShows, setTvShows] = useState<Media[]>([]);
     const [selectedTv, setSelectedTv] = useState<Media | null>(null);
     const [tvDetails, setTvDetails] = useState<any>(null);
-    const [episodeRatings, setEpisodeRatings] = useState<any[]>([]);
+    
     const [selectedSeason, setSelectedSeason] = useState<number>(1);
     const [chartData, setChartData] = useState([]);
 
@@ -63,7 +63,7 @@ const TV: React.FC = () => {
     const handleClose = () => {
         setSelectedTv(null);
         setTvDetails(null);
-        setEpisodeRatings([]);
+        
     };
 
     return (
