@@ -16,7 +16,7 @@ function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect(`${env.URL}/login`);
+    res.redirect(`${env.URL}login`);
 }
 
 const app = express();
