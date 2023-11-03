@@ -20,12 +20,11 @@ jobs:
 
     - name: Move frontend build to backend
       run: |
-        mv frontend/build backend/build
+        mv frontend/build ./build
 
     
     - name: Install backend dependencies
       run: |
-        cd backend
         npm install
 
     - name: Deploy to Heroku
