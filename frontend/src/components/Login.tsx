@@ -1,12 +1,14 @@
 import React from 'react';
 import { Button, Container, Typography, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
+    const navigate = useNavigate();
 
     const handleGoogleLogin = () => {
         window.location.href = 'http://localhost:5001/auth/google';
     };
-//
+
     return (
         <Container
             sx={{

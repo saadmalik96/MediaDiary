@@ -9,7 +9,7 @@ router.get('/google', passport.authenticate('google', {
 }));
 
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), (req, res) => {
-    res.redirect(env.URL);
+    res.redirect("http://localhost:3000");
 });
 
 router.get('/logout', (req, res) => {

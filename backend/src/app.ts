@@ -16,7 +16,7 @@ function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
     if (req.isAuthenticated()) {
         return next();
     }
-    res.redirect(env.URL);
+    res.redirect("http://localhost:3000");
 }
 
 const app = express();
