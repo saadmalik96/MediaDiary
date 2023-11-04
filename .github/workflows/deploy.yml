@@ -24,7 +24,7 @@ jobs:
 
     - name: Move frontend build to backend
       run: |
-      rm -rf backend/build
+    
       mv frontend/build backend/
 
     - name: Install backend dependencies
