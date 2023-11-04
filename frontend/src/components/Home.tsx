@@ -18,7 +18,8 @@ const Home: React.FC = () => {
         try {
             const response = await axios.get(`/api/media/search/${query}/1`);
             const rawData = response.data.results;
-            const transformedData: Media[] = rawData.map((item: any) => {
+            const filteredData = rawData.filter((item: any) => item.media_type === 'tv' || item.media_type === 'movie');
+            const transformedData: Media[] = filteredData.map((item: any) => {
                 let titleValue = item.title;
                 let releaseValue = item.release_date;
                 if (item.media_type === 'tv') {
@@ -37,6 +38,7 @@ const Home: React.FC = () => {
             console.error('Error fetching search results:', error);
         }
     };
+    
 
     const handleAdd = async (media: Media) => {
         try {
@@ -79,17 +81,29 @@ const Home: React.FC = () => {
     
             <List style={{ width: '100%', maxWidth: 600, marginTop: '1rem', marginLeft: 'auto', marginRight: 'auto' }}>
                 {results.map(media => (
-                    <ListItem key={media._id}>
-                        <ListItemText primary={media.title} style={{ textAlign: 'center' }} />
-                        <ListItemText primary={media.release} style={{ textAlign: 'center' }} />
-                        <ListItemSecondaryAction>
-                            <IconButton edge="end" aria-label="add" onClick={() => handleAdd(media)}>
-                                <AddIcon />
-                            </IconButton>
-                        </ListItemSecondaryAction>
+                    <ListItem key={media._id} divider>
+                        <Grid container alignItems="center" justifyContent="center">
+                            <Grid item xs={4} style={{ textAlign: 'center' }}>
+                                <ListItemText primary={media.title} />
+                            </Grid>
+                            <Grid item xs={3} style={{ textAlign: 'center' }}>
+                                <ListItemText primary={media.release} />
+                            </Grid>
+                            <Grid item xs={2} style={{ textAlign: 'center' }}>
+                                <ListItemText primary={media.type} />
+                            </Grid>
+                            <Grid item xs={3} style={{ textAlign: 'center' }}>
+                                <ListItemSecondaryAction>
+                                    <IconButton edge="end" aria-label="add" onClick={() => handleAdd(media)}>
+                                        <AddIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            </Grid>
+                        </Grid>
                     </ListItem>
                 ))}
             </List>
+
     
             <Snackbar
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
