@@ -4,9 +4,10 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "start": "npx nodemon src/server.ts",
-    "lint": "eslint . --ext .ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx nodemon dist/server.ts",
+    "build": "tsc",
+    "heroku-postbuild": "npm run build",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "",
