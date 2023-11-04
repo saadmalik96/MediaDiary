@@ -60,10 +60,23 @@ const Movies: React.FC = () => {
             <Dialog open={Boolean(selectedMovie)} onClose={handleClose}>
                 <DialogTitle>{movieDetails.title}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        {movieDetails.overview}
-                    </DialogContentText>
-                    {}
+                <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} md={4}>
+                                        {/* Image rendering */}
+                                        <img
+                                            src={`https://image.tmdb.org/t/p/original${movieDetails.poster_path}`}
+                                            alt={movieDetails.name}
+                                            style={{ width: '100%', height: 'auto' }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} md={8}>
+                                        <DialogContentText>{movieDetails.overview}</DialogContentText>
+                                    </Grid>
+                                </Grid>
+                            </Grid>                            
+                        </Grid>
                 </DialogContent>
             </Dialog>
         )}
