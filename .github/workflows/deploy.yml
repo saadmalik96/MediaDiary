@@ -12,11 +12,25 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Install dependencies and build project
+    - name: Install frontend dependencies
       run: |
+        cd frontend
         npm install
+
+    - name: Build frontend
+      run: |
+        cd frontend
         npm run build
-      working-directory: . 
+
+    - name: Move frontend build to backend
+      run: |
+      rm -rf backend/build
+      mv frontend/build backend/
+
+    - name: Install backend dependencies
+      run: |
+        cd backend
+        npm install
 
     - name: Deploy to Heroku
       uses: akhileshns/heroku-deploy@v3.12.14
@@ -24,3 +38,5 @@ jobs:
         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
         heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
         heroku_email: ${{ secrets.HEROKU_EMAIL }}
+        heroku_buildpack: "heroku/nodejs"
+        appdir: "backend" 

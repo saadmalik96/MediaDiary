@@ -4,9 +4,11 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "start": "npx nodemon src/server.ts",
-    "lint": "eslint . --ext .ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx nodemon dist/server.ts",
+    "build": "tsc",
+    "postinstall": "tsc -p tsconfig.json",
+    "heroku-postbuild": "npm run build",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "",
@@ -32,5 +34,9 @@
     "mongoose": "^7.5.3",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0"
+  },
+  "engines": {
+    "node": "18.14.0",
+    "npm": "9.3.1"
   }
 }
