@@ -9,7 +9,6 @@ const TV: React.FC = () => {
     const [tvShows, setTvShows] = useState<Media[]>([]);
     const [selectedTv, setSelectedTv] = useState<Media | null>(null);
     const [tvDetails, setTvDetails] = useState<any>(null);
-    const [episodeRatings, setEpisodeRatings] = useState<any[]>([]);
     const [selectedSeason, setSelectedSeason] = useState<number>(1);
     const [chartData, setChartData] = useState([]);
 
@@ -63,7 +62,6 @@ const TV: React.FC = () => {
     const handleClose = () => {
         setSelectedTv(null);
         setTvDetails(null);
-        setEpisodeRatings([]);
     };
 
     return (
@@ -87,40 +85,78 @@ const TV: React.FC = () => {
                 <Dialog open={Boolean(selectedTv)} onClose={handleClose} maxWidth="md" fullWidth>
                     <DialogTitle>{tvDetails.name}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>{tvDetails.overview}</DialogContentText>
-                        
-                        {/* Dropdown for selecting seasons */}
-                        <Select
-                            value={selectedSeason}
-                            onChange={handleSeasonChange}
-                            displayEmpty
-                        >
-                            {Array.from({ length: tvDetails.number_of_seasons }, (_, i) => i + 1).map((season) => (
-                                <MenuItem key={season} value={season}>
-                                    Season {season}
-                                </MenuItem>
-                            ))}
-                        </Select>
-
-                        {/* Chart to display episode ratings */}
-                        <ResponsiveContainer width="100%" height={300}>
-                            <LineChart
-                                data={chartData}
-                                margin={{
-                                    top: 5,
-                                    right: 30,
-                                    left: 20,
-                                    bottom: 5,
-                                }}
-                            >
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
-                                <YAxis domain={[1, 10]} />
-                                <Tooltip />
-                                <Legend />
-                                <Line type="monotone" dataKey="Rating" stroke="#8884d8" activeDot={{ r: 8 }} />
-                            </LineChart>
-                        </ResponsiveContainer>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} md={4}>
+                                        {/* Image rendering */}
+                                        <img
+                                            src={`https://image.tmdb.org/t/p/original${tvDetails.poster_path}`}
+                                            alt={tvDetails.name}
+                                            style={{ width: '100%', height: 'auto' }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} md={8}>
+                                        {/* Overview, number of episodes and seasons */}
+                                        <DialogContentText>
+                                        <strong>Overview:</strong><br></br> {tvDetails.overview}
+                                        </DialogContentText>
+                                        <br></br>
+                                        <Typography variant="body1" gutterBottom>
+                                            <strong>Number of Episodes:</strong> {tvDetails.number_of_episodes}
+                                        </Typography>
+                                        <Typography variant="body1" gutterBottom>
+                                            <strong>Number of Seasons:</strong> {tvDetails.number_of_seasons}
+                                        </Typography>
+                                    </Grid>
+                                    
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12} container spacing={2} alignItems="center" justifyContent="space-between">
+                                <Grid item>
+                                    {/* Title for the ratings chart */}
+                                    <Typography variant="h6" gutterBottom>
+                                        Ratings Chart
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    {/* Dropdown for selecting seasons */}
+                                    <Select
+                                        value={selectedSeason}
+                                        onChange={handleSeasonChange}
+                                        displayEmpty
+                                        style={{ minWidth: 120 }}
+                                    >
+                                        {Array.from({ length: tvDetails.number_of_seasons }, (_, i) => i + 1).map((season) => (
+                                            <MenuItem key={season} value={season}>
+                                                Season {season}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={12}>
+                                {/* Chart to display episode ratings */}
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <LineChart
+                                        data={chartData}
+                                        margin={{
+                                            top: 5,
+                                            right: 30,
+                                            left: 20,
+                                            bottom: 5,
+                                        }}
+                                    >
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="name" />
+                                        <YAxis domain={[1, 10]} />
+                                        <Tooltip />
+                                        <Legend />
+                                        <Line type="monotone" dataKey="Rating" stroke="#8884d8" activeDot={{ r: 8 }} />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </Grid>
+                        </Grid>
                     </DialogContent>
                 </Dialog>
             )}
