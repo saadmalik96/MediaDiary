@@ -3,7 +3,8 @@ import { Button, Container, Typography, Box } from '@mui/material';
 
 const LoginPage: React.FC = () => {
     const handleGoogleLogin = () => {
-        window.location.href = 'http://localhost:5001/auth/google';
+        window.location.href = '/auth/google';
+        // window.location.href = 'http://localhost:5001/auth/google';
     };
 
     return (
